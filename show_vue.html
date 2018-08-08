@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue_data</title>
+</head>
+<body>
+    <div class="yesp" >
+        <h1 v-text="mName"></h1>
+        <div v-html="mTitle"></div>
+        <div v-show="syk"> 沈雨康</div>
+    </div>
+
+
+    <script src="vue.js"></script>
+    <script>
+    let vm = new Vue({
+        el:".yesp",
+        data:{
+            mName:'我的名字',
+            mTitle:'主演:',
+            syk:false,
+        }
+
+    })
+    </script>
+</body>
+</html>

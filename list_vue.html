@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue_data</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+    .wrapper{
+        margin:100px auto;
+        width: 700px;
+    }
+    .basebg{
+        background: #ff0000;
+    }
+    </style>
+</head>
+<body>
+   <div class="wrapper">
+
+        <div class="header">
+        名称：<input type="text" placeholder="请输入产品名称">价格：<input type="text" ><button>添加</button>
+        <input type="text" placeholder="请输入搜索信息"><button>查询</button>
+        </div>
+
+        <ul class="content">
+
+           
+               <li @click="istrue(shangping)" :class="{basebg: shangping.isTrue}" v-for="(shangping,index) in shangping">
+                    <input type="checkbox" name="check"><button>删除</button> <span class="">{{shangping.name}}</span> <span class="">价格：{{shangping.pic}}</span> 
+                </li>
+               <!-- <li @click="istruf($event)" :class="{basebg: rue1}" > <input type="checkbox" name="check"><button>删除</button> <span class=""></span> <span class="">价格：{{pic2}}</span></li>
+               <li @click="istrug($event)" :class="{basebg: rue2}" > <input type="checkbox" name="check"><button>删除</button> <span class=""></span> <span class="">价格：{{pic3}}</span></li>
+               <li @click="istruh($event)" :class="{basebg: rue3}"> <input type="checkbox" name="check"><button>删除</button> <span class=""></span> <span class="">价格：{{pic4}}</span></li>
+               <li @click="istrui($event)" :class="{basebg: rue4}"> <input type="checkbox" name="check"><button>删除</button> <span class=""></span> <span class="">价格：{{pic5}}</span></li>
+            -->
+
+        </ul>
+
+
+        <div class="footer">
+                <button>删除选中</button>总价 <span class="pic"></span>
+        </div>
+
+   </div>
+
+
+
+
+
+    <script src="vue.js"></script>
+    <script>
+        let vm= new Vue({
+            el:'.wrapper',
+            data:{
+                
+                shangping:[
+                  {isTrue:true,
+                    pic:200,
+                    name:'衣服'
+
+                   } ,
+                   {isTrue: true,
+                    pic:3200,
+                    name:'手机'
+                    } ,
+                   {isTrue: true,
+                    pic:500,
+                    name:'裤子'
+                   } ,
+                    { isTrue: true,
+                        pic:800,
+                        name:'眼镜'
+                    },
+                    {isTrue: true,
+                     pic:7800,
+                     name:'电脑'
+                    }
+                ],
+                
+                
+
+              
+            },
+            methods:{
+                istrue(shangping){
+                    shangping.isTrue = !shangping.isTrue;
+                    },
+                // istruf(a){
+                //     console.log(a);
+                //     this.rue1=!this.rue1
+                //     console.log(this)
+                // },
+                // istrug(a){
+                //     console.log(a);
+                //     this.rue2=!this.rue2;
+                //     console.log(this)
+                // },
+                // istruh(a){
+                //     console.log(a);
+                //     this.rue3=!this.rue3;
+                //     console.log(this)
+                // },
+                // istrui(a){
+                //     console.log(a);
+                //     this.rue4=!this.rue4;
+                //     console.log(this)
+                // }
+                },
+               
+                    
+                
+               
+
+        })
+    </script>
+</body>
+</html>
