@@ -23,27 +23,27 @@
    <div class="wrapper">
 
         <div class="header">
-        名称：<input type="text" placeholder="请输入产品名称">价格：<input type="text" ><button>添加</button>
-        <input type="text" placeholder="请输入搜索信息"><button>查询</button>
-        </div>
+        名称：<input type="text" v-model="inputname" placeholder="请输入产品名称">价格：<input type="text"  v-model="inputpic"><button @click="addProduct()">添加</button>
+       <br>
+        <input type="text" placeholder="请输入搜索信息" v-model="messge"><button @click="search()">查询</button>
 
+        </div>
+<hr>
         <ul class="content">
 
            
-               <li @click="istrue(shangping)" :class="{basebg: shangping.isTrue}" v-for="(shangping,index) in shangping">
-                    <input type="checkbox" name="check"><button>删除</button> <span class="">{{shangping.name}}</span> <span class="">价格：{{shangping.pic}}</span> 
+               <li @click.stop="istrue(shangping)" :class="{basebg: shangping.isTrue}" v-for="(shangping,index) in shangping">
+                    <input type="checkbox" name="check" @click.stop v-model="Taglist" :value="index">
+                    <button @click.stop="deleteed(index)">删除</button>
+                     <span class="">{{shangping.name}}</span>
+                      <span class="">价格：{{shangping.pic}}</span> 
                 </li>
-               <!-- <li @click="istruf($event)" :class="{basebg: rue1}" > <input type="checkbox" name="check"><button>删除</button> <span class=""></span> <span class="">价格：{{pic2}}</span></li>
-               <li @click="istrug($event)" :class="{basebg: rue2}" > <input type="checkbox" name="check"><button>删除</button> <span class=""></span> <span class="">价格：{{pic3}}</span></li>
-               <li @click="istruh($event)" :class="{basebg: rue3}"> <input type="checkbox" name="check"><button>删除</button> <span class=""></span> <span class="">价格：{{pic4}}</span></li>
-               <li @click="istrui($event)" :class="{basebg: rue4}"> <input type="checkbox" name="check"><button>删除</button> <span class=""></span> <span class="">价格：{{pic5}}</span></li>
-            -->
 
         </ul>
 
 
         <div class="footer">
-                <button>删除选中</button>总价 <span class="pic"></span>
+                <button @click="deleteAfter()">删除选中</button>总价 <span class="pic">{{shangpingpic(shangping)}}</span>
         </div>
 
    </div>
@@ -56,12 +56,15 @@
     <script>
         let vm= new Vue({
             el:'.wrapper',
+            
             data:{
-                
+                inputpic:0,
+                inputname:'',
+                messge:'',
                 shangping:[
                   {isTrue:true,
                     pic:200,
-                    name:'衣服'
+                    name:'衣服',
 
                    } ,
                    {isTrue: true,
@@ -79,38 +82,86 @@
                     {isTrue: true,
                      pic:7800,
                      name:'电脑'
-                    }
+                    },
+                    
                 ],
-                
-                
 
-              
+                Taglist:[],//左边多选框标志位存储数组
+               
             },
             methods:{
                 istrue(shangping){
                     shangping.isTrue = !shangping.isTrue;
+                    
                     },
-                // istruf(a){
-                //     console.log(a);
-                //     this.rue1=!this.rue1
-                //     console.log(this)
-                // },
-                // istrug(a){
-                //     console.log(a);
-                //     this.rue2=!this.rue2;
-                //     console.log(this)
-                // },
-                // istruh(a){
-                //     console.log(a);
-                //     this.rue3=!this.rue3;
-                //     console.log(this)
-                // },
-                // istrui(a){
-                //     console.log(a);
-                //     this.rue4=!this.rue4;
-                //     console.log(this)
-                // }
+                    shangpingpic(shangping){
+                        // console.log(shangping);
+                        let sum=0;
+                        for(let a of shangping){
+                            if(a.isTrue===true){
+                                sum+=a.pic;
+                            }
+                        }
+                        return sum;
+                    },
+                    deleteed(a){
+                       console.log(a);
+                        this.shangping.splice(a,1)
+                        console.log(this.shangping);
+                        // shangping.splice(1,1,'')
+                       
+                    },
+        
+                    deleteAfter(){
+                        // console.log(this.shangping);
+                        this.shangping=this.shangping.filter((elem,index)=>{
+                            if(!this.Taglist.includes(index)){
+                                // console.log(index);
+                                return elem;
+                                // console.log(elem);
+                            }                            
+                        });
+                        this.Taglist=[];
+                    },
+                    addProduct(){
+                        this.shangping.push({
+                            isTrue: true,
+                            pic:parseInt(this.inputpic),
+                            name:this.inputname
+                        })
+                        this.inputname='';
+                        this.inputpic;
+                        console.log(this.pic)
+
+                    },
+                    search(){
+                      
+                        
+                        this.shangping=this.shangping.filter((elem,index)=>{
+                           
+                            if(this.messge.includes(elem.name)){
+                                // console.log(index);
+                                return elem;
+                                // console.log(elem);
+                            }                            
+                        });
+                        this.messge='';
+                    }
                 },
+               computed:{
+                // shangpingpic(){
+                //         // console.log(shangping);
+                //         let sum=0;
+                //         for(let a of this.shangping){
+                //             if(a.isTrue===true){
+                //                 sum+=a.pic;
+                //             }
+                //         }
+                //         return sum;
+                //     },
+                // 写在computed里面的函数没有传参数，但是必须上面引用到了才能调用，然后后期会牵连执行，就是检测到属于它的东西变动率就会重新计算。
+                   
+               }
                
                     
                 
