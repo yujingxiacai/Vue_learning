@@ -7,24 +7,19 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="count">
+    <div id="app">
+        <count-number></count-number>
         <count-number></count-number>
     </div>
     <script src="vue.js"></script>
     <script>
-  var componentA={
-        data:function(){
-            return{
-                count:0
-            }
-        },
-        template:'<div @click="count++" >每点击一次自增1次，现在的值是：{{count}}</div>'
-    }
+    Vue.component('count-number', {
+    template: '<h1>自定义组件!</h1>'
+    })
+    // 创建根实例
     new Vue({
-            el:'#count',
-        component:{'count-number':componentA}
-        })
-   
+    el: '#app'
+    })
     </script>
 </body>
 </html>

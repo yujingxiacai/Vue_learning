@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="yu">
+        <count-each v-on:increment="incrementTotal"> </count-each>
+        <count-each v-on:increment="incrementTotal"> </count-each>
+        <count-each v-on:increment="incrementTotal"> </count-each>
+        <div><span style="margin-left: 20px">我怎么变的，请仔细观察哦！</span>{{ThreeC}}</div>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+    Vue.component('count-each',{
+            template:'<button @click="add()">{{counter}}</button>',
+            data:function(){
+                return{
+                    counter:0
+                }
+            },
+            methods:{
+                    add(){
+                        this.counter++;
+                        this.$emit('increment')//$emit是自定义外部调用自定义组件的一个点击事件。这里的increment就相当于是外面的click了
+                    }
+            }
+    })
+    new Vue({
+        el:'#yu',
+        data:{
+                ThreeC:0,
+        },
+        methods:{
+            incrementTotal(){
+                this.ThreeC += 1;
+            }
+        }
+        
+    })
+    </script>
+</body>
+</html>
