@@ -9,13 +9,31 @@
 </head>
 
 <body>
-    <div>
+    <div id="yu">
 
 
         用户名：
-        <input type="text"> 密码：
+        <input type="text" v-focus>
+         密码：
         <input type="password">
     </div>
+    <script src="vue.js"></script>
+    <script>
+    new Vue({
+        el:"#yu",
+        data:{
+
+        },
+        directives:{
+            focus: {
+                // 指令的定义
+                inserted: function (el) {
+                el.focus()
+                }
+            }
+        }
+    })
+    </script>
 </body>
 
 </html>
