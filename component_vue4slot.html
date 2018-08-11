@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="" id="yu">
+        <!-- 登录 -->
+        <login-user>
+          <span slot="title"><h1 >登录</h1></span>  
+        <div slot="content"> 用户名:<input type="text" >
+        密码:<input type="password">
+        </div>
+          
+        </login-user>
+
+        <!-- 注册 -->
+        <login-user>
+              <span slot="title"> <h1 >注册</h1></span> 
+
+                <div slot="content"><!-- 最为插孔的，内容的一个包裹，这样才能实现吧下面的中文提示都能一起解析了，
+                    但是如果你的是给下面的input单独绑定的话slot的话就不会解析中文提示了 -->
+                    用户名:<input type="text" >
+                     邮:<input type="text" >
+                 </div>
+                
+        </login-user>
+    </div>
+
+
+   <!-- 插槽组件slot  -->
+<template id="usin">
+    <div>
+    <h1>
+            <slot name="title"></slot>
+        </h1>
+    <form action="">
+        
+            <slot name="content"></slot>
+    </form></div>
+</template>
+    <script src="vue.js"></script>
+    <script>
+        new Vue({
+            el:'#yu',
+            components:{
+                loginUser:{
+                    template:'#usin',
+                }
+            }
+        }) 
+    </script>
+</body>
+
+</html>
