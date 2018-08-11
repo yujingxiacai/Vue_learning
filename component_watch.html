@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="yu">
+        <button @click="count++">add+1</button>
+        <div>{{count}}</div>
+        <input type="number" v-model="putin">
+        <button @click="sums()">求和</button>
+        <span>:{{sumW}}</span>
+        <br>
+        <div>自动求和为：{{sum}}</div>
+        <div>自动求和为：{{sum}}</div>
+        <div>自动求和为：{{sum}}</div>
+        <div>自动求和为：{{sum}}</div>
+        <div>这里是computed监控属性的调用展示：{{newCount}}</div>
+        <!-- 这里computed虽然是被多次用到，但是只要数据更改，值调用一次computed计算属性里面的函数，其余的直接用计算后的缓存属性的值就行了，所以大大的减少了计算损耗 -->
+    </div>
+
+    <script src="vue.js"></script>
+    <script>
+        new Vue({
+            el: '#yu',
+            data: {
+                count: 0,
+                sumW: 0,
+                putin: 0,
+
+            },
+            methods: {
+                sums() {
+                    this.sumW = this.count + parseInt(this.putin)
+                }
+            },
+
+            //计算属性，这里的函数如果是返回值的话就会在上面的data中创建一个"虚拟"的数据，所以函数名最好别和上面的data中有重名的
+            //这里是受上面多个值的改变而自动改变的，。所以很容易想到计算属性原生就有监控的特性，监控上面元素的变化。
+            computed: {
+                sum() {
+                    return this.count + parseInt(this.putin);
+                },
+                newCount: {
+                    get() {
+                        console.log('获取');
+                        return this.count + 1;
+                    },
+                    set() {
+                        console.log('设置');
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

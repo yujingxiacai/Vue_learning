@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
+    .mask{
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0,0,0,.5)
+
+
+    }
+    .content-box{
+        width: 300px;
+        height: 400px;
+        position: absolute;
+        top:50%;
+        left:50%;
+        transform: translate(-50%,-50%);
+        background: #cccccc;
+    }
+    
+    </style>
+</head>
+<body>
+
+
+    <div id="yu">
+            <button @click="logintag=true">登录</button>
+            <button @click="registertag=true">注册</button>
+        <div class="mask" v-show="logintag">
+            <div class="content-box" >
+                <div class="content-header" style="height: 32px;">
+                    <div style="float: left;" >
+                        <te>
+                            <span slot="title">登录</span>
+                        </te>
+                    </div>
+                    <button style="float: right ;color: #f00;">X</button>
+                </div>
+                <div class="content-c">
+                        <te>
+                            <template slot="content">
+                                用户名： <input type="text">
+                                <br>
+                                密码： <input type="password">
+                            </template>
+                        </te>
+                </div>
+            </div>
+         </div>
+         <div class="mask" v-show="registertag">
+                <div class="content-box" >
+                    <div class="content-header" style="height: 32px;">
+                        <div style="float: left;" >
+                            <te>
+                                <span slot="title">注册</span>
+                            </te>
+                        </div>
+                        <button style="float: right ;color: #f00;">X</button>
+                    </div>
+                    <div class="content-c">
+                            <te>
+                                <template slot="content">
+                                    用户名： <input type="text">
+                                    <br>
+                                    邮箱：<input type="email">
+                                    <br>
+                                    密码： <input type="password">
+                                </template>
+                            </te>
+                    </div>
+                </div>
+             </div>
+    </div>
+    <template id="zu">
+        <div> 
+            <h4>
+                <slot name="title"></slot>
+            </h4>
+        <form action="">
+                <slot name="content"></slot>
+        </form>
+        </div>
+       
+    </template>
+    <script src="vue.js"></script>
+    <script>
+    new Vue({
+        el:'#yu',
+        data:{
+            logintag:false,
+            registertag:false
+        },
+        components:{
+            te:{
+                template:'#zu'
+            }
+        }
+    })
+    </script>
+</body>
+</html>
