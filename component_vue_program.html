@@ -34,7 +34,9 @@
 </head>
 <body>
 
-
+<!-- 强调，此处是一个component和slot应用比较失败的案例，
+    应为我们把整体应该写入组件以备以后复用的结构写在了外面，该是后来复用组件是该变的内容放到了组件，
+    没真正的实现解耦合，这个component是一个失败的复用性不高的案例， -->
     <div id="yu">
             <button @click="logintag=true">登录</button>
             <button @click="registertag=true">注册</button>
@@ -46,7 +48,7 @@
                             <span slot="title">登录</span>
                         </te>
                     </div>
-                    <button style="float: right ;color: #f00;">X</button>
+                    <button style="float: right ;color: #f00;" @click="logintag=false">X</button>
                 </div>
                 <div class="content-c">
                         <te>
@@ -67,7 +69,7 @@
                                 <span slot="title">注册</span>
                             </te>
                         </div>
-                        <button style="float: right ;color: #f00;">X</button>
+                        <button style="float: right ;color: #f00;" @click="registertag=false">X</button>
                     </div>
                     <div class="content-c">
                             <te>
