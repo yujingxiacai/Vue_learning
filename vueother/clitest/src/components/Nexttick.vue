@@ -1,6 +1,6 @@
 <template>
     <div id="nextt">
-        <div @click="Change">{{message}}</div> 
+        <div class="wrapper" @click="Change">{{message}}</div> 
     </div>
 </template>
 
@@ -42,7 +42,9 @@ export default {
 </script>
 
 <style scoped>
-
+.wrapper{
+    border: 1px solid #cccccc;
+}
 </style>
 
 
